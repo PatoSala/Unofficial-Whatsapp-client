@@ -16,7 +16,8 @@ class Window extends Component {
         qr: undefined,
         wid: undefined,
         chats: undefined,
-        selectedChat: undefined
+        selectedChat: undefined,
+        messages: undefined /* [{body: "Hola! Cómo estás?", fromMe: false},{body: "Muy bien! Gracias por preguntar.", fromMe: true}] */
     }
 
     // we trigger an http req to init wpp client
@@ -45,10 +46,15 @@ class Window extends Component {
     });
 
     // when chat on chat list is clicked, wid is set to selectedChat state
-    selectChat = (wid) => {
+    selectChat = async (wid) => {
+        let url = server + '/api/whatsapp/messages/' + wid;
+        let response = await fetch(url);
+        let messages = await response.json();
+
         this.setState({
-            selectedChat: wid
-        });
+            selectedChat: wid,
+            messages: messages
+        }, () => {console.log(this.state.messages);});
         console.log(wid);
     }
 
@@ -78,7 +84,7 @@ class Window extends Component {
                     </div>
                     <div className="right-container">
                         <RightHeader selectedChat={this.state.selectedChat}/>
-                        <ChatBox selectChat={this.state.selectedChat}/>
+                        <ChatBox selectChat={this.state.selectedChat} messages={this.state.messages}/>
                     </div>
                 </>
             )

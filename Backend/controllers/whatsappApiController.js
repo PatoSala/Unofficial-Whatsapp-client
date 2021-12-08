@@ -11,27 +11,29 @@ if (fs.existsSync(SESSION_FILE_PATH)) {
 
 const client = new Client();
 
+// manage client events
+
+client.on('qr', qr => {
+    qrcode.generate(qr, { small: true });
+    io.emit('qr', qr);
+});
+
+client.on('ready', () => {
+    console.log('Client is ready!');
+    console.log(client);
+
+    io.emit('ready', {
+        logged: true,
+        wid: client.info.wid._serialized
+    });
+});
+
+client.on('authenticated', (session) => {
+    sessionData = session;
+});
+
 whatsappApiController = {
     init: (req, res) => {
-
-        client.on('qr', qr => {
-            qrcode.generate(qr, { small: true });
-            io.emit('qr', qr);
-        });
-
-        client.on('ready', () => {
-            console.log('Client is ready!');
-            console.log(client);
-
-            io.emit('ready', {
-                logged: true,
-                wid: client.info.wid._serialized
-            });
-        });
-
-        client.on('authenticated', (session) => {
-            sessionData = session;
-        });
 
         client.initialize();
 

@@ -4,40 +4,33 @@ import './ChatBox.css';
 import server from '../server';
 
 class ChatBox extends Component {
-    state = {
-        messages: undefined
-    }
 
-    getMessages = async () => {
-        let url = server + '/api/whatsapp/messages/' + this.props.selectedChat;
-        let response = await fetch(url);
-        let messages = await response.json();
-
-        this.setState({
-            messages: messages
-        });
-    }
-
-    componentDidMount() {
-        this.getMessages();
+    /* componentDidMount() {
+        console.log(this.props.messages);
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.selectedChat !== this.props.selectedChat) {
-            this.getMessages();
-        }
-    }
+        console.log(this.props.messages);
+    } */
 
     render () {
-        if (this.props.selectedChat === undefined) {
+        if (this.props.messages === undefined) {
             return (
                 <p>Keep your phone connected</p>
             )
         } else {
             return (
-                <ul>
-                    {this.state.messages.map(message => {
-                        <li>{message.body}</li>
+                <ul className="messages">
+                    {this.props.messages.map(message => {
+                        if (message.fromMe === false) { // if message.fromMe = false we give a certain style
+                            return (
+                                <li className="chatMessage fromElse">{message.body}</li>
+                            )
+                        } else if (message.fromMe === true) { // if message.fromMe = true we give a differetn style
+                            return (
+                                <li className="chatMessage fromMe">{message.body}</li>
+                            )
+                        }
                     })}
                 </ul>
             )

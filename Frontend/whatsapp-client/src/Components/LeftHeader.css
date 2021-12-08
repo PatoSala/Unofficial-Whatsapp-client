@@ -3,6 +3,7 @@
     max-width: 100%;
     background: var(--white);
     border-bottom: 1px solid #d1d1d1;
+    border-right: 1px solid #d1d1d1;
 }
 
 .ppic {
