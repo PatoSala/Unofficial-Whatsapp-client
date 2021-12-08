@@ -1,0 +1,19 @@
+.left-header {
+    padding: 10px 16px;
+    max-width: 100%;
+    background: var(--white);
+    border-bottom: 1px solid #d1d1d1;
+}
+
+.ppic {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    overflow: hidden;
+    background: gray;
+}
+
+.ppic img {
+    max-width: 100%;
+    max-height: 100%;
+}
