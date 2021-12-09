@@ -5,7 +5,7 @@
 
 Note: 'wid' stands for 'whatsapp id'.
 
-#### Starts client
+### Starts client
 
 ```http
   GET /api/whatsapp/init
@@ -13,7 +13,7 @@ Note: 'wid' stands for 'whatsapp id'.
 None of the following endpoints will work if
 client is not initialized.
 
-#### Get current client info
+### Get current client info
 
 ```http
   GET /api/whatsapp/info
@@ -21,7 +21,7 @@ client is not initialized.
 
 **Returns:** *object*
 
-#### Get chat info 
+### Get chat info 
 
 ```http
   GET /api/whatsapp/info/:wid
@@ -32,14 +32,14 @@ client is not initialized.
 
 **Returns:** *object*
 
-#### Get all chats 
+### Get all chats 
 
 ```http
   GET /api/whatsapp/chats
 ```
 **Returns:** *array*
 
-#### Get chat messages
+### Get chat messages
 
 ```http
   GET /api/whatsapp/messages/:wid
@@ -50,7 +50,7 @@ client is not initialized.
 
 **Returns:** *array*
 
-#### Get chat profile picture
+### Get chat profile picture
 
 ```http
   GET /api/whatsapp/ppic/:wid
