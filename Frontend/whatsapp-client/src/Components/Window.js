@@ -6,6 +6,7 @@ import LeftHeader from './LeftHeader';
 import ChatList from './ChatList';
 import RightHeader from './RightHeader';
 import ChatBox from './ChatBox';
+import Footer from './Footer';
 
 import socket from '../socket';
 import server from '../server';
@@ -17,7 +18,8 @@ class Window extends Component {
         wid: undefined,
         chats: undefined,
         selectedChat: undefined,
-        messages: undefined /* [{body: "Hola! Cómo estás?", fromMe: false},{body: "Muy bien! Gracias por preguntar.", fromMe: true}] */
+        isGroup: undefined,
+        messages: undefined /* [{body: "Hola! Cómo estás?", fromMe: false}, {body: "lorem ipsum dolor sit amet bla bla bla blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", fromMe: false},{body: "Muy bien! Gracias por preguntar.", fromMe: true}] */
     }
 
     // we trigger an http req to init wpp client
@@ -25,6 +27,12 @@ class Window extends Component {
         let url = server + '/api/whatsapp/init';
         let response = await fetch(url);
         let data = await response.json();
+    }
+
+    isGroup = (value) => {
+        this.setState({
+            isGroup: value
+        });
     }
 
     // on 'qr' event we pass the string value recieved to state
@@ -94,9 +102,9 @@ class Window extends Component {
                         <ChatList wid={this.state.wid} chats={this.state.chats} selectChat={this.selectChat}/>
                     </div>
                     <div className="right-container">
-                        <RightHeader selectedChat={this.state.selectedChat}/>
-                        <ChatBox selectedChat={this.state.selectedChat} messages={this.state.messages}/>
-                        <footer></footer>
+                        <RightHeader selectedChat={this.state.selectedChat} isGroup={this.isGroup}/>
+                        <ChatBox selectedChat={this.state.selectedChat} messages={this.state.messages} isGroup={this.state.isGroup}/>
+                        <Footer wid={this.state.selectedChat}/>
                     </div>
                 </>
             )

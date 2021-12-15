@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './ChatList.css';
 import ChatObject from './ChatObject';
+/* import { Spinner } from 'react-bootstrap'; */
 
 import server from '../server';
 import socket from '../socket';
@@ -32,9 +33,10 @@ class ChatList extends Component {
     render () {
         if (this.state.chats === undefined) {
             return (
-                <div className="loading-chats">
-                    <p>Loading</p>
-                </div>
+               /*  <div className="loading-chats">
+                    <Spinner animation="border" variant="primary"/>
+                </div> */
+                <p>loading</p>
             )
         } else {
             return (

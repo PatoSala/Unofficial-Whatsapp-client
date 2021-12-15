@@ -1,13 +1,14 @@
 .right-header {
     padding: 10px 16px;
     max-width: 100%;
-    background: var(--white);
-    border-bottom: 1px solid #d1d1d1;
+    background: var(--background);
+    border-bottom: 1px solid var(--dark-border);
 }
 
 .open-chat-info {
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .open-chat-ppic {
@@ -22,6 +23,7 @@
     margin: 0;
     display: inline-block;
     padding-left: 15px;
+    color: var(--white);
 }
 
 .open-chat-ppic img {

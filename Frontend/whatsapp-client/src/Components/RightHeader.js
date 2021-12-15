@@ -7,6 +7,7 @@ class RightHeader extends Component {
     state = {
         pushname: undefined,
         img: "https://www.ssu.ca/wp-content/uploads/2020/08/default-profile.png",
+        isGroup: false
     }
 
     getChatInfo = async () => {
@@ -16,8 +17,11 @@ class RightHeader extends Component {
 
         this.setState({
             pushname: chatInfo.name,
-            img: chatInfo.img
+            img: chatInfo.img,
+            isGroup: chatInfo.isGroup
         });
+
+        this.props.isGroup(chatInfo.isGroup)
     }
 
     componentDidMount() {
@@ -33,7 +37,7 @@ class RightHeader extends Component {
     render () {
         if (this.props.selectedChat === undefined) {
             return (
-                <p>waiting</p>
+                <p></p>
             )
         } else {
             return (
