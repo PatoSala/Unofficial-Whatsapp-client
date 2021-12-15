@@ -2,16 +2,9 @@ import React, { Component } from "react";
 import './ChatBox.css';
 
 import server from '../server';
+import socket from '../socket';
 
 class ChatBox extends Component {
-
-    /* componentDidMount() {
-        console.log(this.props.messages);
-    }
-
-    componentDidUpdate(prevProps) {
-        console.log(this.props.messages);
-    } */
 
     render () {
         if (this.props.messages === undefined) {

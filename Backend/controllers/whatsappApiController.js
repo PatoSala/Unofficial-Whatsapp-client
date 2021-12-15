@@ -32,6 +32,17 @@ client.on('authenticated', (session) => {
     sessionData = session;
 });
 
+client.on('message', message => {
+    io.emit('message', {
+        from: message.from,
+    });
+    console.log('New message from ' + message.from);
+});
+
+client.on('message_create', message => {
+    io.emit('message_create', true)
+});
+
 whatsappApiController = {
     init: (req, res) => {
 

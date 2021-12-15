@@ -24,7 +24,7 @@ class Window extends Component {
     startClient = async () => {
         let url = server + '/api/whatsapp/init';
         let response = await fetch(url);
-        let data = await response;
+        let data = await response.json();
     }
 
     // on 'qr' event we pass the string value recieved to state
@@ -58,6 +58,17 @@ class Window extends Component {
         console.log(wid);
     }
 
+    updateMessages = socket.on('message', (data) => {
+        if (data.from === this.state.selectedChat) {
+            this.selectChat(data.from)
+        }
+        console.log('New message recieved from ' + data.from);
+
+        /* socket.on('message_create', data => {
+            this.selectChat(this.state.selectedChat)
+        }); */
+    });
+
     componentDidMount() {
         if (this.state.logged === false) {
             this.startClient();
@@ -84,7 +95,8 @@ class Window extends Component {
                     </div>
                     <div className="right-container">
                         <RightHeader selectedChat={this.state.selectedChat}/>
-                        <ChatBox selectChat={this.state.selectedChat} messages={this.state.messages}/>
+                        <ChatBox selectedChat={this.state.selectedChat} messages={this.state.messages}/>
+                        <footer></footer>
                     </div>
                 </>
             )

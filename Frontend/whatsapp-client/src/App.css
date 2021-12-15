@@ -16,3 +16,10 @@ body {
     overflow: hidden;
 }
 
+footer {
+    height: 55px;
+    background: var(--white);
+    position: relative;
+    bottom: 0;
+}
+

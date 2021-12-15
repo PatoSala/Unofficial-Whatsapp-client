@@ -3,6 +3,7 @@ import './ChatList.css';
 import ChatObject from './ChatObject';
 
 import server from '../server';
+import socket from '../socket';
 
 class ChatList extends Component {
     state = {
@@ -19,6 +20,10 @@ class ChatList extends Component {
             chats: data
         });
     }
+
+    updateChats = socket.on('message', data => {
+        this.fetchChats();
+    });
 
     componentDidMount() {
         this.fetchChats();
